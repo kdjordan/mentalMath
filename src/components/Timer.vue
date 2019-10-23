@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="mb-2">
-            <button class="appBtn" @click="goTimer">START</button>
             <div class="go-right">Time Remaining : {{ timerLength }}</div>
             <div style="content:'', display: table, clear:both"></div>
         </div>
@@ -11,27 +10,9 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
+    import { mapState } from 'vuex';
+
     export default {
-    
-    data() {
-        return { 
-            // count: this.timerLength,
-            // answer: 'correct + 1'
-        }
-    }, 
-    methods: {
-        ...mapActions([
-            'startTimer'
-        ]),
-        goTimer() {
-            this.startTimer().then(() => {
-                this.$emit('out-time')
-            }).catch(() => {
-                console.log('error');
-            });
-        }
-    },
     computed: {
         ...mapState([
             'timerLength',
@@ -40,10 +21,7 @@
             'lastSubmission'
         ])
     }
-
 }
-
- 
 </script>
 
 <style scoped>

@@ -7,7 +7,7 @@ export default new Vuex.Store({
     
     
     state: {
-        timerLength: 5,
+        timerLength: 60,
         totalQuestions: 0,
         correctAnswers: 0,
         lastSubmission: '',
@@ -16,6 +16,11 @@ export default new Vuex.Store({
     mutations: {
         SET_TIMER: (state, sec) => {
             state.timerLength = sec;
+        }
+    },
+    getters: {
+        getWinPercentage: state => {
+            return Math.ceil(((state.correctAnswers / state.totalQuestions * 100)));
         }
     },
     actions: {

@@ -1,16 +1,50 @@
 <template>
-    <div class="welcome">
+<div>
+    <div class="welcome" v-if="start">
         <h3>Welcome to the Mental Math Challenge</h3>
-        <h3>:: The Rules ::</h3>
-        <div class="narrow">You Have 60 sec to answer as many Math Challenges as You Can.<br>
-        No Cheating !</div>
-        <button class="appBtn" @click="$emit('start-game')">LET'S GO</button>
+        
+        <div class="narrow medFont">
+            <h3>:: The Rules ::</h3><br>
+            <p>
+            You Have 60 sec to answer as many Math Challenges as You Can.<br><br>
+                <span class="animatePulse">No Cheating !</span>
+            </p>
+        </div>
+        <button class="appBtn" @click="startCountdown">LET'S GO</button>
     </div>
+    <div class="welcome" v-else>
+        <h3>Here We Go</h3>
+        
+        <div class="narrow medFont">
+            <h1>{{ timer }}</h1>
+           
+        </div>
+        
+    </div>
+</div>
+
 </template>
 
 <script>
 export default {
-    
+    data() {
+        return {
+            start: true,
+            timer: 5
+        }
+    },
+    methods: {
+        startCountdown() {
+            this.start = false;
+            setInterval(() => {
+                this.timer = this.timer -1 
+                if(this.timer == 0) {
+                    this.$emit('start-game')
+                }
+            }, 1000);
+        }
+
+    }
 }
 </script>
 
@@ -43,4 +77,5 @@ export default {
     .appBtn:focus {
         outline: none;
     }
+    
 </style>

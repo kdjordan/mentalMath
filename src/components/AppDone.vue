@@ -1,13 +1,30 @@
 <template>
+<div>
      <div class="alert alert-success text-center">
-        <h1>Aaaaaannnnnd You're Done</h1>
-        <hr>
-        <button class="btn btn-primary" @click="startGame">Go Another Round</button>
+        <h1 id="typed">Aaaaaannnnnd You're Done</h1>
+        <h3>&lt; Your Results &gt;</h3>
+            <p class="medFont">
+            Length of Challenge :: 60s <br>  
+            Questions Attempted :: {{ this.$store.state.totalQuestions }} <br>
+            Correct Questions :: {{ this.$store.state.correctAnswers }} <br>
+            Success Rate :: {{ getWinPercentage }}%
+            </p>
+        <br><br>
+        <button class="appBtn" @click="startGame">Try Again</button>
     </div>
+</div>
 </template>
 
 <script>
-export default {
+import { mapState, mapGetters } from 'vuex'
+
+
+export default {        
+   computed: {
+       ...mapGetters([
+           'getWinPercentage'
+       ])
+   },
     methods: {
         startGame() {
             this.$emit('start-game');
@@ -16,6 +33,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .alert-success {
+        background: #022601;
+        border: 1px solid #5CF257;
+        color: #5CF257;
+        margin-top: 25%;
+    }
 </style>
