@@ -1,0 +1,12 @@
+function AddTime(seconds){
+        /* If extra time is added without clearTimeout(stopTime);, the function tick(); inside of the function countdown(); runs twice.  
+        Since the seconds in this parameter is inherited from this.sec in the function countdown(),
+        the seconds in the timer are decremented every 2 seconds. More accurately, this.sec--; in the function countdown() is invoked twice without clearTimeout(stopTime);.  
+        So the seconds in the timer don't work in the way you would expect. */
+        clearTimeout(stopTime);
+        countdown.call(this.sec, seconds);
+        sec = this.sec + seconds;
+    }
+
+
+    // AddTime(n); //where n is the number of seconds required. 
